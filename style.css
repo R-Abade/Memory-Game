@@ -1,7 +1,13 @@
+body {
+    background-color: #000000;
+}
+
 #container {
-    background-color: #ccc;
-    border: 2px solid #444;
+    background: rgb(110, 24, 24);
+    background: linear-gradient(4deg, rgba(110, 24, 24, 1) 0%, rgba(253, 167, 45, 1) 100%);
     width: 100%;
+    border: 2px solid #000000;
+    border-radius: 1%;
 }
 
 #memoryGame {
@@ -12,14 +18,16 @@
 }
 
 .card {
+    background: rgb(14, 12, 138);
+    background: radial-gradient(circle, rgba(14, 12, 138, 1) 50%, rgba(252, 176, 69, 1) 100%);
     width: 300px;
     height: 450px;
     cursor: grab;
-    background-image: url("verse.png");
     border: 2px solid #000000;
     border-radius: 5%;
-    transition: transform 0.5s;
+    transition: all 1000ms ease;
     transform-style: preserve-3d;
+    margin-left: 3px;
 }
 
 .hidden {
@@ -33,4 +41,8 @@ img {
     border-radius: 5%;
     object-fit: cover;
 
+}
+
+p {
+    margin-left: 15px;
 }

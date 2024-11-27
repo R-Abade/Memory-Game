@@ -70,23 +70,6 @@ function createImg(container, pathImage) { //cria um div para cada imagem
 
 }
 
-/*function combination(chosen1, chosen2) {
-    let points = 0;
-    const chosen1 = card.addEventListener('click', (event) => {
-        card.classList.add('hidden');
-    });
-    const chosen2 = card.addEventListener('click', (event) => {
-        card.classList.add('hidden');
-    })
-    if (chosen1 == chosen2) {
-        points++;
-        if (points == 6) {
-            alert("Parabéns, você completou o jogo!");
-        }
-    }
-
-}*/
-
 function shuffled(array) {
     return array.sort(() => Math.random() - 0.5); //função recomendada pelo professor  
 }
@@ -111,7 +94,6 @@ function main(paths) {
     });
     timer();
     countTry();
-    //combination();
 }
 
 // Chame a função main com os caminhos das imagens  
