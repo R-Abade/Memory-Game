@@ -1,22 +1,61 @@
 <!DOCTYPE html>
-<html>
-
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="style.css">
-        <title>Jogo da Memória</title>
-    </head>
-
-    <body>
-        <div style="display: inline-block;" id="container">
-            <p>Contagem de tentativas: <span id="tryCount">0</span></p>
-            <p>Temporizador: <span id="timer">0</span> segundos</p>
-
-            <div id="memoryGame"></div>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <title>Card Memory Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="game-container">
+    <header>
+        <h1>Playing Card Memory Game</h1>
+        <div class="game-controls">
+            <button id="restart-button">Restart Game</button>
+            <div class="difficulty-selector">
+                <label for="difficulty">Difficulty:</label>
+                <select id="difficulty">
+                    <option value="easy">Easy (6 pairs)</option>
+                    <option value="medium">Medium (8 pairs)</option>
+                    <option value="hard">Hard (12 pairs)</option>
+                </select>
+            </div>
         </div>
+    </header>
 
-        <script src="script.js"></script>
-    </body>
+    <div class="game-stats">
+        <div class="stat-box">
+            <span class="stat-label">Attempts:</span>
+            <span id="attempts">0</span>
+        </div>
+        <div class="stat-box">
+            <span class="stat-label">Time:</span>
+            <span id="timer">0s</span>
+        </div>
+        <div class="stat-box">
+            <span class="stat-label">Matches:</span>
+            <span id="matches">0</span>
+        </div>
+    </div>
 
+    <div id="game-board" class="game-board"></div>
+
+    <div id="victory-modal" class="modal">
+        <div class="modal-content">
+            <h2>Congratulations!</h2>
+            <p>You completed the game in <span id="final-time">0</span> seconds with <span id="final-attempts">0</span> attempts!</p>
+            <button id="play-again">Play Again</button>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>Created for Web Development Course - 2024</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
 </html>
