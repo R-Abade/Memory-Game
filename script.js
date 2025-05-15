@@ -1,4 +1,4 @@
-//Variáveis do Memory Card
+// Variáveis do jogo da memória
 let gameActive = false;
 let timer = 0;
 let attempts = 0;
@@ -9,29 +9,28 @@ let secondCard = null;
 let lockBoard = false;
 let difficulty = 'easy';
 let cardDeck = [];
-let cardPairs = 6; // Default for easy mode
+let cardPairs = 6; // padrão modo fácil
 
-// DOM elementos
+// Elementos do DOM
 const gameBoard = document.getElementById('game-board');
 const timerElement = document.getElementById('timer');
 const attemptsElement = document.getElementById('attempts');
 const matchesElement = document.getElementById('matches');
-const restartButton = document.getElementById('restart-button');
+const restart = document.getElementById('restart-button');
 const difficultySelector = document.getElementById('difficulty');
-const victoryModal = document.getElementById('victory-modal');
-const playAgainButton = document.getElementById('play-again');
-const finalTimeElement = document.getElementById('final-time');
-const finalAttemptsElement = document.getElementById('final-attempts');
+const victory = document.getElementById('victory');
+const playAgain = document.getElementById('play-again');
+const finalTime = document.getElementById('final-time');
+const finalAttempts = document.getElementById('final-attempts');
 
-
-// Event listeners
-restartButton.addEventListener('click', startGame);
+// Eventos
+restart.addEventListener('click', startGame);
 difficultySelector.addEventListener('change', (e) => {
     difficulty = e.target.value;
     startGame();
 });
-playAgainButton.addEventListener('click', () => {
-    victoryModal.classList.remove('show');
+playAgain.addEventListener('click', () => {
+    victory.classList.remove('show');
     startGame();
 });
 
@@ -40,7 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function startGame() {
-    resetGameState();
+    resetGame();
+    gameBoard.classList.remove('easy', 'medium', 'hard');
+    gameBoard.classList.add(difficulty);
 
     switch(difficulty) {
         case 'easy':
@@ -61,7 +62,7 @@ function startGame() {
     gameActive = true;
 }
 
-function resetGameState() {
+function resetGame() {
     clearInterval(timerInterval);
     gameActive = false;
     timer = 0;
@@ -102,22 +103,19 @@ function createCardDeck(numPairs = 6) {
     }
 
     for (const cardImage of availableCards) {
-        cardDeck.push({
-            image: cardImage,
-            id: Math.random().toString(36).substr(2, 9)
-        });
-        cardDeck.push({
-            image: cardImage,
-            id: Math.random().toString(36).substr(2, 9)
-        });
+        cardDeck.push({ image: cardImage, id: generateId() });
+        cardDeck.push({ image: cardImage, id: generateId() });
     }
 
     shuffle(cardDeck);
     return cardDeck;
 }
 
+function generateId() {
+    return Math.random().toString(36).substring(2, 9);
+}
+
 function renderCards() {
-    const gameBoard = document.getElementById('game-board');
     gameBoard.innerHTML = '';
 
     cardDeck.forEach(card => {
@@ -131,28 +129,24 @@ function createCardElement(card) {
     cardElement.classList.add('card');
     cardElement.dataset.id = card.id;
 
-    const frontFace = document.createElement('div');
-    frontFace.classList.add('card-face', 'card-front');
+    const front = document.createElement('div');
+    front.classList.add('card-face', 'card-front');
 
-    const backFace = document.createElement('div');
-    backFace.classList.add('card-face', 'card-back');
+    const back = document.createElement('div');
+    back.classList.add('card-face', 'card-back');
 
-    // Add card image to front face
     const image = document.createElement('img');
     image.src = card.image;
-    image.alt = 'Card';
-    frontFace.appendChild(image);
+    image.alt = 'Carta';
+    front.appendChild(image);
 
-    // Add card elements to the card
-    cardElement.appendChild(frontFace);
-    cardElement.appendChild(backFace);
+    cardElement.appendChild(front);
+    cardElement.appendChild(back);
 
-    // Add click event
     cardElement.addEventListener('click', flipCard);
 
     return cardElement;
 }
-
 
 function flipCard() {
     if (lockBoard || this === firstCard) return;
@@ -187,11 +181,9 @@ function checkForMatch() {
         }
     } else {
         unflipCards();
-
     }
 }
 
-//bloqueia dupla de cartas
 function disableCards() {
     firstCard.classList.add('matched');
     secondCard.classList.add('matched');
@@ -220,12 +212,10 @@ function gameComplete() {
     clearInterval(timerInterval);
     gameActive = false;
 
-    // Update modal text
-    finalTimeElement.textContent = timer;
-    finalAttemptsElement.textContent = attempts;
+    finalTime.textContent = timer;
+    finalAttempts.textContent = attempts;
 
-    // Show victory modal (with a slight delay for better UX)
     setTimeout(() => {
-        victoryModal.classList.add('show');
+        victory.classList.add('show');
     }, 500);
 }

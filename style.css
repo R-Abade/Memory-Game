@@ -36,6 +36,19 @@ body {
     position: relative;
 }
 
+.game-board.easy {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.game-board.medium {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.game-board.hard {
+    grid-template-columns: repeat(6, 1fr);
+}
+
+
 /* Header styles */
 header {
     display: flex;
@@ -190,7 +203,7 @@ select {
     padding: 5px;
 }
 
-/* Victory modal */
+/* Victory*/
 .modal {
     display: none;
     position: fixed;
@@ -243,7 +256,7 @@ footer {
     font-size: 0.9rem;
 }
 
-/* Media queries for responsiveness */
+/* Media queries para responsividade*/
 @media (max-width: 768px) {
     .game-board {
         grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
